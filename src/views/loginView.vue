@@ -7,7 +7,7 @@ const password = ref("");
 const error = ref(false);
 const login = () => {
   if (username.value === "Jimmy" && password.value === "section33") {
-    router.push("./account");
+    router.push("./purchase");
   } else {
     error.value = true;
   }
@@ -16,7 +16,7 @@ const login = () => {
 
 <template>
   <div class="home-container">
-    <h1>Home</h1>
+    <h1>Login</h1>
     <form @submit.prevent="login()">
       <input type="text" placeholder="Username" v-model="username" />
       <input type="password" placeholder="Password" v-model="password" />
