@@ -17,16 +17,25 @@
 h1{
   color: rgb(22, 32, 59);
   text-align: center;
+  padding: 20px;
+}
+.header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
 }
 
 .sign_in{
   text-align: center;
   background-color: chartreuse;
-  align-content: center;
+  /* align-content: center; */
   width: 100px;
   height: 50px;
   font-size: 15px;
   flex: auto;
+  padding: 10px;
 }
 
 .centuryImg{
