@@ -1,9 +1,13 @@
 <script setup>
 import { useStore } from '../store/index.js'
 import { storeToRefs } from 'pinia'
+import { ref } from 'vue';
 import modal from "../components/siteModal.vue"
 
 const main = useStore()
+
+const showModal = ref(false);
+const selectedId = ref(0);
 
 var moviesData = []
 var cartData = []
@@ -15,22 +19,22 @@ main.getMovies()
 moviesData = movies
 console.log(moviesData)
 
-const openModal = () => {
-    console.log('clicked')
+const openModal = (id) => {
+    showModal.value = true;
+    selectedId.value = id;
     //check if exists to avoid duplicates
 }
 
-const checkout = () => {
-    console.log('checkout')
+const closeModal = () => {
+    showModal.value = false;
 }
 </script>
 
 <template>
     <h1>Purchase</h1>
     <img v-for="movie in moviesData" :src="movie.poster" @click="openModal(movie.id)"/>
-    <button @click="checkout()"> </button>
     <div class="siteModal">
-        <modal />
+        <modal v-if="showModal" @toggleModal="closeModal()" :id="selectedId" />
     </div>
 </template>
 
