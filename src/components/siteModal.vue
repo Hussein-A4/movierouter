@@ -1,6 +1,31 @@
 <script setup>
+
+import axios from "axios"
+import { ref } from "vue"
 const props = defineProps(["id"]);
 const emits = defineEmits(["toggleModal"]);
+
+const movies = ref(null);
+const movieData = ref(null);
+
+const getMovie = async () => {
+  movieData.value = (
+    await axios.get(`https://api.themoviedb.org/3/movie/${props.id}`, {
+      params: {
+        api_key: "45f0db8e20f87e3e431aa1750076bb74",
+        append_to_response: "videos",
+      },
+    })
+  )
+};
+
+
+getMovie();
+
+console.log(props.id);
+
+let id = props.id
+
 </script>
 
 <template>
@@ -9,6 +34,8 @@ const emits = defineEmits(["toggleModal"]);
       <div class="modal-inner-container">
         <button class="close-button" @click="emits('toggleModal')">X</button>
         <h1>{{ props.id }}</h1>
+        <button class="purchaseBtn">Purchase</button>
+        <img id="image" :src="`https://image.tmdb.org/t/p/w500${movieData.poster_path}`" />
       </div>
     </div>
   </Teleport>
@@ -24,15 +51,16 @@ const emits = defineEmits(["toggleModal"]);
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background: #00000099;
+  background: #0000008c;
   z-index: 3;
 }
 
 .modal-outer-container .modal-inner-container {
-  background-color: #1F2123;
+  background-color: #abcbeb;
   width: clamp(280px, 100%, 800px);
   height: 400px;
   position: relative;
+  border: 10px;
 }
 
 .modal-outer-container .modal-inner-container .close-button {
