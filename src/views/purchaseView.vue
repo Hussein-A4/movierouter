@@ -42,5 +42,6 @@ const closeModal = () => {
 img{
     aspect-ratio: 2/3;
     width: 200px;
+    gap: 1rem;
 }
 </style>

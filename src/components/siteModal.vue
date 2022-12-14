@@ -2,11 +2,14 @@
 
 import axios from "axios"
 import { ref } from "vue"
+import { useStore } from '../store'
 const props = defineProps(["id"]);
 const emits = defineEmits(["toggleModal"]);
 
 const movies = ref(null);
 const movieData = ref(null);
+
+const store = useStore();
 
 const getMovie = async () => {
   movieData.value = (
@@ -21,6 +24,7 @@ const getMovie = async () => {
 
 
 getMovie();
+// await store.getMovies();
 
 console.log(props.id);
 
@@ -31,11 +35,12 @@ let id = props.id
 <template>
   <Teleport to="body">
     <div class="modal-outer-container" @click.self="emits('toggleModal')">
-      <div class="modal-inner-container">
+      <div class="modal-inner-container" v-if="movieData">
         <button class="close-button" @click="emits('toggleModal')">X</button>
         <h1>{{ props.id }}</h1>
+        <h1>{{ movieData.title }}</h1>
         <button class="purchaseBtn">Purchase</button>
-        <img id="image" :src="`https://image.tmdb.org/t/p/w500${movieData.poster_path}`" />
+        <img id="image" :src="`https://image.tmdb.org/t/p/w500${movieData.poster_path}`" alt="no image" />
       </div>
     </div>
   </Teleport>
