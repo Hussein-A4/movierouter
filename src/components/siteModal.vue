@@ -26,7 +26,7 @@ const getMovie = async () => {
 getMovie();
 // await store.getMovies();
 
-console.log(props.id);
+console.log(movieData.data);
 
 let id = props.id
 
@@ -37,10 +37,10 @@ let id = props.id
     <div class="modal-outer-container" @click.self="emits('toggleModal')">
       <div class="modal-inner-container" v-if="movieData">
         <button class="close-button" @click="emits('toggleModal')">X</button>
-        <h1>{{ props.id }}</h1>
-        <h1>{{ movieData.title }}</h1>
-        <button class="purchaseBtn">Purchase</button>
-        <img id="image" :src="`https://image.tmdb.org/t/p/w500${movieData.poster_path}`" alt="no image" />
+        <h1>{{ movieData.data.title }}</h1>
+        <h1>{{ movieData.data.release_date }}</h1>
+        <button>purchase</button>
+        <img id="image" :src="`https://image.tmdb.org/t/p/w500${movieData.data.poster_path}`" alt="no image" />
       </div>
     </div>
   </Teleport>
@@ -77,5 +77,10 @@ let id = props.id
   font-weight: bold;
   font-size: 1.25rem;
   color: white;
+}
+
+#image{
+  width: 200px;
+  aspect-ratio: 2/3;
 }
 </style>

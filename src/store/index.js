@@ -18,7 +18,7 @@ export const useStore = defineStore('store', {
       this.movies = data.map((movie) => {
         return {
           id: movie.id,
-          poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+          poster: movie.poster_path,
         }
       });
     },
